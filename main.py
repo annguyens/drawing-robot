@@ -30,9 +30,9 @@ def running_motors(link_1,link_2,dest_x,dest_y):
     deg_1= math.degrees(angle_1)
     deg_2= math.degrees(angle_2)
 
-    arm_motor1.run_target(speed = 50, target_angle=deg_1, then=Stop.HOLD, wait=False)
+    arm_motor1.run_target(speed = 100, target_angle=deg_1, then=Stop.HOLD, wait=False)
     # wait(2000)
-    arm_motor2.run_target(speed = 50, target_angle=deg_2, then=Stop.HOLD, wait=False)
+    arm_motor2.run_target(speed = 100, target_angle=deg_2, then=Stop.HOLD, wait=False)
     # wait(2000)
 
     print("Theoretical:", deg_1, " ",deg_2,"\n")
@@ -71,22 +71,22 @@ diff_x=x2-x1
 diff_y=y2-y1
 
 #number of increments 
-num_inc = 10 
+num_inc = 20
 
 #dividing x and y distance into increments 
 increment_x=diff_x/num_inc
 increment_y=diff_y/num_inc
 
-# for i in range(0,num_inc):
-#     x1=x1+increment_x
-#     y1=y1+increment_y
-#     print("i:",i," x:",x1," y:",y1,"\n")
-#     running_motors(a1,a2,x1,y1)
-#     wait(1000)
-#     print("Actual:",arm_motor1.angle(), arm_motor2.angle())
+for i in range(0,num_inc):
+    x1=x1+increment_x
+    y1=y1+increment_y
+    print("i:",i," x:",x1," y:",y1,"\n")
+    running_motors(a1,a2,x1,y1)
+    wait(500)
+    print("Actual:",arm_motor1.angle(), arm_motor2.angle())
 
 # run to corner
-corner(x3,y3,a1,a2)
+# corner(x3,y3,a1,a2)
 
 # wait(3000)
 
