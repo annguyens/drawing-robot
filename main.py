@@ -10,10 +10,6 @@ import math
 
 #GLOBAL VARIABLES
 
-# Link lengths
-a1=120
-a2=75
-
 #number of increments 
 num_inc = 20
 
@@ -22,7 +18,7 @@ num_inc = 20
 
 def corner(x, y, a1, a2):
     angle_2=math.acos(((x**2)+(y**2)-(a1**2)-(a2**2))/(2*a1*a2))
-    angle_1=math.atan(y/x)-math.atan((a2*math.sin(angle_2))/(a1+(a2*math.cos(angle_2))))
+    angle_1=math.atan2(y,x)-math.atan2((a2*math.sin(angle_2)),(a1+(a2*math.cos(angle_2))))
 
     deg_1= math.degrees(angle_1)
     deg_2= math.degrees(angle_2)
@@ -32,7 +28,7 @@ def corner(x, y, a1, a2):
 
 def running_motors(link_1,link_2,dest_x,dest_y):
     angle_2=math.acos(((dest_x**2)+(dest_y**2)-(link_1**2)-(link_2**2))/(2*link_1*link_2))
-    angle_1=math.atan(dest_y/dest_x)-math.atan((link_2*math.sin(angle_2))/(link_1+(link_2*math.cos(angle_2))))
+    angle_1=math.atan2(dest_y,dest_x)-math.atan2((link_2*math.sin(angle_2)),(link_1+(link_2*math.cos(angle_2))))
 
     deg_1= math.degrees(angle_1)
     deg_2= math.degrees(angle_2)
@@ -63,7 +59,7 @@ def draw_line(x1, y1, x2, y2):
 
 def pen_down():
     servo_motor.reset_angle(0)
-    servo_motor.run_time(speed=100, time=3300, then=Stop.HOLD, wait=True)
+    servo_motor.run_time(speed=100, time=3100, then=Stop.HOLD, wait=True)
 
 def pen_up():
     servo_motor.reset_angle(0)
@@ -103,26 +99,24 @@ y3=100
 # pen_up()
 # pen_down()
 
-
-print("Corner: (15, 10)")
+print("Corner: (5, 3)")
 pen_up()
-corner(x3, y3, a1, a2)
+corner(50, 30, a1, a2)
 wait(2000)
 pen_down()
 
 wait(2000)
-print("First point")
-draw_line(150,100,100,70)
+print("First point: (12,3)")
+draw_line(50,30,120,30)
 
 wait(1000)
-print("Second point: (8, 9)")
-draw_line(100, 70, 70, 40)
+print("Second point: (7, 8)")
+draw_line(120, 30, 70, 80)
 
 wait(2000)
-print("Done!")
-draw_line(70, 40, 150, 100)
-pen_up()
+print("Thrid point:(12,8)")
+draw_line(70, 80, 120, 80)
 
-
-
-
+wait(2000)
+print("Done :(5,3)")
+draw_line(120, 80, 50, 30)
